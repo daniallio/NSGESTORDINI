@@ -46,4 +46,17 @@ public class Clienti {
 	@JsonManagedReference (value="ordine")// solo quando il webservice resituisce un json, punto di partenza nella classe	 colllegata invece inserisco JSONBACK
 	private Set<Ordini> ordine = new HashSet();
 	
+	
+	private ClientiDTO clientiToDTO() {
+		
+		ClientiDTO clienteDTO = new ClientiDTO();
+		
+		clienteDTO.setCodiceCliente(this.codiceCliente);
+		clienteDTO.setDescrizione(this.descrizione);
+		clienteDTO.setKey(this.key);
+		
+		return clienteDTO;
+		
+	}
+	
 }
