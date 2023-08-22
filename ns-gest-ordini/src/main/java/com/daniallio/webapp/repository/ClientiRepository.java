@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.daniallio.webapp.entities.Clienti;
 
 @Repository
-public interface ClientiReposiotory extends JpaRepository<Clienti, Integer>{
+public interface ClientiRepository extends JpaRepository<Clienti, Integer>{
 
 }

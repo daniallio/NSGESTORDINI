@@ -47,7 +47,7 @@ public class Clienti {
 	private Set<Ordini> ordine = new HashSet();
 	
 	
-	private ClientiDTO clientiToDTO() {
+	public ClientiDTO clientiToDTO() {
 		
 		ClientiDTO clienteDTO = new ClientiDTO();
 		
