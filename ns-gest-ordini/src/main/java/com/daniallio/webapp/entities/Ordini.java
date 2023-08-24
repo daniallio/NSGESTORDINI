@@ -1,7 +1,5 @@
 package com.daniallio.webapp.entities;
 
-
-
 import java.util.Date;
 
 import javax.persistence.Basic;
@@ -25,44 +23,57 @@ import lombok.EqualsAndHashCode;
 @Table(name = "ORDINI")
 @Data
 
-
 public class Ordini {
 
-	
 	@Id
 	@Column(name = "ord_code", nullable = false, updatable = false, insertable = false)
-	private int key;
-	
+	private String key;
+
 	@Column(name = "ord_desc")
 	@Basic(optional = false)
 	private String descrizione;
-	
+
 	@Column(name = "ord_val")
 	@Basic(optional = false)
 	private double valore;
-	
+
 	@Column(name = "ord_hours")
 	@Basic(optional = false)
 	private double ore;
-	
+
 	@Column(name = "ord_res_hours")
 	@Basic(optional = false)
 	private double oreResidue;
-	
 
 	@Column(name = "ord_res_val")
 	@Basic(optional = false)
 	private double valResiduo;
-	
+
 	@Column(name = "ord_date")
 	@Temporal(TemporalType.DATE)
 	private Date dataOrd;
-	
-	
+
 	@ManyToOne
-	@EqualsAndHashCode.Exclude //per problema su loombook
-	@JoinColumn(name = "ord_cli",referencedColumnName = "cli_key") //name è il nome della colonna FK, reference.. nome della chiave primaria nella tab collegata
-	@JsonBackReference (value="ordine") //punto di arrivo che non verrà mostrato se estraggo il json della classe
+	@EqualsAndHashCode.Exclude // per problema su loombook
+	@JoinColumn(name = "ord_cli", referencedColumnName = "cli_key") // name è il nome della colonna FK, reference.. nome
+																	// della chiave primaria nella tab collegata
+	@JsonBackReference(value = "ordine") // punto di arrivo che non verrà mostrato se estraggo il json della classe
 	private Clienti cliente;
-	
+
+	public OrdiniDTO ordiniToDTO() {
+
+		OrdiniDTO ordineDTO = new OrdiniDTO();
+
+		ordineDTO.setKey(this.key);
+		ordineDTO.setDescrizione(this.descrizione);
+		ordineDTO.setValore(this.valore);
+		ordineDTO.setDataOrd(this.dataOrd);
+		ordineDTO.setOre(this.ore);
+		ordineDTO.setOreResidue(this.oreResidue);
+		ordineDTO.setValResiduo(this.valResiduo);
+		ordineDTO.setCliente(this.cliente.getCodiceCliente());
+		
+		return ordineDTO;
+
+	}
 }

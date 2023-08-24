@@ -60,7 +60,9 @@ function caricaDocUtente(jsonData, container, container2, container3) {
       container3.appendChild(btnEl)
   }*/
 	var root = document.getElementById('rootTH');
-	jsonData.forEach(elemento => root.insertAdjacentHTML('beforebegin', `<tr><td>${elemento.codiceCliente}</td>
+	
+	
+	jsonData.forEach(elemento => root.insertAdjacentHTML('beforebegin', `<tr id = 'rowClienti'><td>${elemento.codiceCliente}</td>
 	<td>${elemento.descrizione}</td>
 	<td><button onclick = cancCliente(${elemento.key}) class="btn btn-danger">Elimina</button></td></tr>`));
 }
@@ -77,7 +79,7 @@ function cancCliente(key){
             }).then(response => {
         if (response.status == 200) {
             console.log(response.status)
-			cercaClienti()
+			location.reload();
         }else{
 			alert('Probelma nella cancellazione')
 		}

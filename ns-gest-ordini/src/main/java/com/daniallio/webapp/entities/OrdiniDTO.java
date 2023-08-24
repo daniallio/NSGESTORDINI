@@ -8,7 +8,7 @@ import lombok.Data;
 public class OrdiniDTO {
 
 	
-	private int key;
+	private String key;
 	
 	private String descrizione;
 	
