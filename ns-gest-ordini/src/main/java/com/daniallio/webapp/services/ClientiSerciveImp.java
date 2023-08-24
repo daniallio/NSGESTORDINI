@@ -46,4 +46,11 @@ public class ClientiSerciveImp implements ClientiService{
 		return repo.findById(id);
 	}
 
+	@Override
+	public void cancCliente(int id) {
+		
+		repo.deleteById(id);
+		
+	}
+
 }

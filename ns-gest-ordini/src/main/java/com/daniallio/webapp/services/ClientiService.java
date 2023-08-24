@@ -17,4 +17,6 @@ public interface ClientiService {
 	
 	public Optional<Clienti> selClienteById (int id);
 	
+	public void cancCliente (int id);
+	
 }

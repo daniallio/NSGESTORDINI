@@ -60,5 +60,33 @@ function caricaDocUtente(jsonData, container, container2, container3) {
       container3.appendChild(btnEl)
   }*/
 	var root = document.getElementById('rootTH');
-	jsonData.forEach(elemento => root.insertAdjacentHTML('beforebegin', `<tr><td>${elemento.codiceCliente}</td><td>${elemento.descrizione}</td></tr>`));
+	jsonData.forEach(elemento => root.insertAdjacentHTML('beforebegin', `<tr><td>${elemento.codiceCliente}</td>
+	<td>${elemento.descrizione}</td>
+	<td><button onclick = cancCliente(${elemento.key}) class="btn btn-danger">Elimina</button></td></tr>`));
 }
+
+
+//cancella un cliente
+
+function cancCliente(key){
+	
+	console.log(key);
+	
+	    fetch("http://localhost:8080/api/clienti/del/" + key,
+            {method: "DELETE"
+            }).then(response => {
+        if (response.status == 200) {
+            console.log(response.status)
+			cercaClienti()
+        }else{
+			alert('Probelma nella cancellazione')
+		}
+    })
+	
+}
+
+
+
+
+
+
