@@ -17,7 +17,7 @@ function cercaClienti() {
         return response.json()
     }).then(jsonData => {
         console.log(jsonData)      
-        caricaDocUtente(jsonData, container, container2, container3)
+        caricaClienti(jsonData, container, container2, container3)
     })
 
 }
@@ -26,7 +26,7 @@ function cercaClienti() {
 
 
 //funzione che carica la lista dei documenti, la uso per fare il cerca e per caricare gli utenti condivisi
-function caricaDocUtente(jsonData, container, container2, container3) {
+function caricaClienti(jsonData, container, container2, container3) {
   /*for (var i = 0; i < jsonData.length; i++) {
       //creo i link per il download e gli elementi della lista
       let el = document.createElement(`p`)
