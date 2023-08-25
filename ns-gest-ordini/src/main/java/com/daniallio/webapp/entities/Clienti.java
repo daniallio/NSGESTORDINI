@@ -46,6 +46,13 @@ public class Clienti {
 	@JsonManagedReference (value="ordine")// solo quando il webservice resituisce un json, punto di partenza nella classe	 colllegata invece inserisco JSONBACK
 	private Set<Ordini> ordine = new HashSet();
 	
+	// relazione una molti con la tabella MOVIMENTI
+	//un cliente può avere più movimenti
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference (value="movimento")// solo quando il webservice resituisce un json, punto di partenza nella classe	 colllegata invece inserisco JSONBACK
+	private Set<Movimenti> movimenti = new HashSet();
+	
+	
 	
 	public ClientiDTO clientiToDTO() {
 		
