@@ -9,9 +9,9 @@ public interface MovimentiService {
 
 	public List<Movimenti> selAllMovimenti ();
 	
-	public void insCliente(Movimenti movimento); 
+	public void insMovimento(Movimenti movimento); 
 	
-	public void updCliente(Movimenti movimento); 
+	public void updMovimento(Movimenti movimento); 
 	
 	public Optional<Movimenti> selMovimentoById (int id);
 	

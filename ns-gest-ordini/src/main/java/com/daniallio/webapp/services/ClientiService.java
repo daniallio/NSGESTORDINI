@@ -19,4 +19,6 @@ public interface ClientiService {
 	
 	public void cancCliente (int id);
 	
+	public Optional<Clienti> selClienteByCodice (String codice);
+	
 }

@@ -9,7 +9,7 @@ public interface OrdiniService {
 
 	public List<Ordini> selAllOrdini();
 	
-	public Optional<Ordini> sellOrdiniByID (int id);
+	public Optional<Ordini> sellOrdiniByID (String id);
 	
 	public void insOrdini(Ordini ordini);
 	

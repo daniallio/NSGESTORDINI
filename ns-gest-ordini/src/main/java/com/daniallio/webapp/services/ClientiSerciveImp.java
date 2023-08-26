@@ -53,4 +53,10 @@ public class ClientiSerciveImp implements ClientiService{
 		
 	}
 
+	@Override
+	public Optional<Clienti> selClienteByCodice(String codice) {
+		
+		return repo.findByCodiceCliente(codice);
+	}
+
 }

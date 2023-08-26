@@ -27,14 +27,14 @@ public class MovimentiServiceImp implements MovimentiService{
 	}
 
 	@Override
-	public void insCliente(Movimenti movimento) {
+	public void insMovimento(Movimenti movimento) {
 		
 		repo.save(movimento);
 		
 	}
 
 	@Override
-	public void updCliente(Movimenti movimento) {
+	public void updMovimento(Movimenti movimento) {
 		repo.save(movimento);
 		
 	}

@@ -2,6 +2,7 @@ package com.daniallio.webapp.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.daniallio.webapp.entities.Clienti;
@@ -18,8 +20,11 @@ import com.daniallio.webapp.entities.Movimenti;
 import com.daniallio.webapp.entities.MovimentiDTO;
 import com.daniallio.webapp.entities.Ordini;
 import com.daniallio.webapp.entities.OrdiniDTO;
+import com.daniallio.webapp.services.ClientiService;
 import com.daniallio.webapp.services.MovimentiService;
 import com.daniallio.webapp.services.OrdiniService;
+
+import net.bytebuddy.implementation.bytecode.Throw;
 
 @Controller
 @RequestMapping("api/movimenti")
@@ -28,6 +33,14 @@ public class MovimentiController {
 	
 	@Autowired
 	MovimentiService serviceMov;
+	
+	@Autowired 
+	ClientiService serviceCli;
+	
+	@Autowired
+	OrdiniService serviceOrd;
+	
+	
 	
 	private static final Logger logger = LoggerFactory.getLogger(MovimentiController.class);
 	
@@ -44,6 +57,37 @@ public class MovimentiController {
 		
 		return new ResponseEntity<List<MovimentiDTO>>(movimentiDTO, HttpStatus.OK);
 		
+	}
+	
+	//inserisco un nuovo movimento
+	@PostMapping (value = "/ins", produces = "application/json")
+	public ResponseEntity<MovimentiDTO>  insMovimento (MovimentiDTO movimento) throws Exception{
+		
+		Optional<Ordini> ordine;
+		Optional<Clienti> cliente;
+		
+		//verifico che esistano l'ordine ed il cliente
+		
+		ordine = serviceOrd.sellOrdiniByID(movimento.getOrdine());
+		cliente = serviceCli.selClienteByCodice(movimento.getCliente());
+		
+		if(!ordine.isPresent() || !cliente.isPresent()) {
+			
+			throw new Exception ("Cliente o ordine non corretti");
+		}
+		
+		//creo il movimento da inserire
+		
+		Movimenti movimentoIns = new Movimenti();
+		
+		movimentoIns.setCliente(cliente.get());
+		movimentoIns.setOrdine(ordine.get());
+		movimentoIns.setOre(movimento.getOre());
+		movimentoIns.setNote(movimento.getNote());
+		
+		serviceMov.insMovimento(movimentoIns);
+		
+		return new ResponseEntity<MovimentiDTO>(movimento,HttpStatus.OK);
 	}
 	
 }
