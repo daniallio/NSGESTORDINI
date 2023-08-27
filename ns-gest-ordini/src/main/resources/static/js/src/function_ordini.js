@@ -1,10 +1,6 @@
-console.log('QUA')
 cercaOrdini();
 
 function cercaOrdini() {
-
-
-
     let container = document.getElementById("all");
     let container2 = document.getElementById("allDw");
     let container3 = document.getElementById("allEl");
