@@ -1,9 +1,11 @@
-console.log('QUA')
+
 cercaClienti();
 cercaOrdini();
 const fIns= document.getElementById("insMov") //from di inserimento movimento
 
+console.log(fIns)
 
+fIns.addEventListener('submit', callbackFunction);
 
 
 //recupera i dati dei clienti
@@ -78,34 +80,47 @@ function selectElementClienti(id, jsonData) {
 
 
 
+function callbackFunction(event) {
+    event.preventDefault();
+    const myFormData = new FormData(event.target);
+
+    const formDataObj = Object.fromEntries(myFormData.entries());
+    console.log(formDataObj);
+}
 
 
 
 
-
-fIns.addEventListener("submit", event=>{
+/*fIns.addEventListener("submit", event=>{
    console.log("ENTRO")
-    var data = new FormData()
+    var form = document.getElementById('insMov');
+    var data = new FormData(form)
   
     event.preventDefault()
+ 
+    var object = {};
+    data.forEach((value, key) => object[key] = value);
+    var json = JSON.stringify(object);
     
-    console.log(data);
+    console.log(json);
     
-  /*  fetch("http://localhost:8080/esame_cloud/rest/documenti/upload",
+    
+   fetch("http://localhost:8080/api/movimenti/ins",
     {
         method: 'POST',
         headers: {
-                    'Content-Type': 'multipart/form-data'
+        	 'Accept': 'application/json',
+             'Content-Type': 'application/json'
                 },
         body: data
     }).then(response =>{
         console.log(response.status)
-    })*/
+    })
     
     
     
 })
-
+*/
 
 
 
