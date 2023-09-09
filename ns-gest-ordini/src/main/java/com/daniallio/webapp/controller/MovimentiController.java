@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.daniallio.webapp.entities.Clienti;
@@ -61,7 +62,12 @@ public class MovimentiController {
 	
 	//inserisco un nuovo movimento
 	@PostMapping (value = "/ins", produces = "application/json")
-	public ResponseEntity<MovimentiDTO>  insMovimento (MovimentiDTO movimento) throws Exception{
+	public ResponseEntity<MovimentiDTO>  insMovimento (@RequestBody MovimentiDTO movimento) throws Exception{
+		
+		logger.info("********Medoto insMovimento");
+		
+		logger.info(movimento.getCliente());
+		
 		
 		Optional<Ordini> ordine;
 		Optional<Clienti> cliente;
@@ -69,7 +75,14 @@ public class MovimentiController {
 		//verifico che esistano l'ordine ed il cliente
 		
 		ordine = serviceOrd.sellOrdiniByID(movimento.getOrdine());
+		
+		logger.info("********Medoto insMovimento trovato ordine");
+		
+		logger.info(movimento.getCliente());
+		
 		cliente = serviceCli.selClienteByCodice(movimento.getCliente());
+		
+		logger.info("********Medoto insMovimento " + ordine.get().getDescrizione());		
 		
 		if(!ordine.isPresent() || !cliente.isPresent()) {
 			

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.daniallio.webapp.entities.Clienti;
 import com.daniallio.webapp.entities.ClientiDTO;
+
 import com.daniallio.webapp.services.ClientiService;
 
 @Controller
@@ -64,6 +65,30 @@ public ResponseEntity<String> deletePost(@PathVariable int id) {
     
 }
 
+//ritorna l'elenco dei clienti
+@GetMapping(value = "/cerca/{codice}", produces = "application/json")
+public ResponseEntity<ClientiDTO> getClienteByCodice (@PathVariable("codice") String codice){
+	
+	logger.info("********Medoto getClienteByCodice");
+	
+	
+	Optional<Clienti> clienti =  serviceClienti.selClienteByCodice(codice);		
+	//converto in DTO
+	
+	ClientiDTO clienteDTO = new ClientiDTO();
+	
+	//se esite lo converto in DTO altrimenti eccezione
+	if(clienti.isPresent()) {
+		
+		clienteDTO  = clienti.get().clientiToDTO();
+	}
+	
 
+	
+	return new ResponseEntity<ClientiDTO>(clienteDTO, HttpStatus.OK);
+	
+	
+
+}
 
 }

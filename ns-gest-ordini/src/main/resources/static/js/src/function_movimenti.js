@@ -86,6 +86,27 @@ function callbackFunction(event) {
 
     const formDataObj = Object.fromEntries(myFormData.entries());
     console.log(formDataObj);
+	
+	
+	    
+   fetch("http://localhost:8080/api/movimenti/ins",
+    {
+        method: 'POST',
+        headers: {
+        	 'Accept': 'application/json',
+             'Content-Type': 'application/json'
+                },
+        body: formDataObj
+    }).then(response =>{
+        console.log(response.status)
+    })
+    
+    
+    
+
+	
+	
+	
 }
 
 
