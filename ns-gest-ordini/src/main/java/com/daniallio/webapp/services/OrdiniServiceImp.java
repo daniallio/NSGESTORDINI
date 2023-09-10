@@ -26,8 +26,7 @@ public class OrdiniServiceImp implements OrdiniService{
 
 	@Override
 	public Optional<Ordini> sellOrdiniByID(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.findById(id);
 	}
 
 	@Override

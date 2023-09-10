@@ -95,8 +95,7 @@ public class MovimentiController {
 			}
 		
 		
-		logger.info("********Medoto insMovimento trovato ordine");
-		
+		logger.info("********Medoto insMovimento trovato ordine");	
 		
 		logger.info("********Medoto insMovimento " + ordine.get().getDescrizione());		
 		
@@ -106,7 +105,7 @@ public class MovimentiController {
 		
 		Movimenti movimentoIns = new Movimenti();
 		
-		//movimentoIns.setCliente(cliente.get());
+		movimentoIns.setCliente(cliente.get());
 		movimentoIns.setOrdine(ordine.get());
 		movimentoIns.setOre(movimento.getOre());
 		movimentoIns.setNote(movimento.getNote());

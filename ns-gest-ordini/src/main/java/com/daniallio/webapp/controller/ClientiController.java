@@ -19,6 +19,7 @@ import com.daniallio.webapp.entities.Clienti;
 import com.daniallio.webapp.entities.ClientiDTO;
 
 import com.daniallio.webapp.services.ClientiService;
+import com.daniallio.webapp.services.OrdiniService;
 
 @Controller
 @RequestMapping("api/clienti")
@@ -26,6 +27,9 @@ public class ClientiController {
 
 @Autowired
 ClientiService serviceClienti;
+
+@Autowired
+OrdiniService serviceOrdini;
 
 private static final Logger logger = LoggerFactory.getLogger(ClientiController.class);
 

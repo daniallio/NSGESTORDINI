@@ -18,6 +18,7 @@ import com.daniallio.webapp.entities.Clienti;
 import com.daniallio.webapp.entities.ClientiDTO;
 import com.daniallio.webapp.entities.Ordini;
 import com.daniallio.webapp.entities.OrdiniDTO;
+import com.daniallio.webapp.services.ClientiService;
 import com.daniallio.webapp.services.OrdiniService;
 
 @Controller
@@ -27,6 +28,8 @@ public class OrdiniController {
 	
 	@Autowired
 	OrdiniService serviceOrdini;
+	
+	
 	
 	private static final Logger logger = LoggerFactory.getLogger(OrdiniController.class);
 	
