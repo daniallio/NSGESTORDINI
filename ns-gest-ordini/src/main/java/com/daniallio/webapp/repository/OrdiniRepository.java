@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.daniallio.webapp.entities.Ordini;
 
 @Repository
-public interface OrdiniRepository extends JpaRepository<Ordini,Integer>{
+public interface OrdiniRepository extends JpaRepository<Ordini,String>{
 
 }

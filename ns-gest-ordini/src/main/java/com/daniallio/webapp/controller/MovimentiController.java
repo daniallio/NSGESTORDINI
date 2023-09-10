@@ -66,34 +66,47 @@ public class MovimentiController {
 		
 		logger.info("********Medoto insMovimento");
 		
-		logger.info(movimento.getCliente());
-		
+	
 		
 		Optional<Ordini> ordine;
 		Optional<Clienti> cliente;
 		
 		//verifico che esistano l'ordine ed il cliente
 		
+		
+		logger.info(movimento.getCliente());
+	
+		cliente = serviceCli.selClienteByCodice(movimento.getCliente());
+		
+		if(!cliente.isPresent()) {
+			
+			throw new Exception ("Cliente non corrett0");
+		}
+		
+		
+		logger.info(movimento.getOrdine());
+		
+		
 		ordine = serviceOrd.sellOrdiniByID(movimento.getOrdine());
+		
+			if(!ordine.isPresent()) {
+			
+				throw new Exception ("Ordine non corrett0");
+			}
+		
 		
 		logger.info("********Medoto insMovimento trovato ordine");
 		
-		logger.info(movimento.getCliente());
-		
-		cliente = serviceCli.selClienteByCodice(movimento.getCliente());
 		
 		logger.info("********Medoto insMovimento " + ordine.get().getDescrizione());		
 		
-		if(!ordine.isPresent() || !cliente.isPresent()) {
-			
-			throw new Exception ("Cliente o ordine non corretti");
-		}
+
 		
 		//creo il movimento da inserire
 		
 		Movimenti movimentoIns = new Movimenti();
 		
-		movimentoIns.setCliente(cliente.get());
+		//movimentoIns.setCliente(cliente.get());
 		movimentoIns.setOrdine(ordine.get());
 		movimentoIns.setOre(movimento.getOre());
 		movimentoIns.setNote(movimento.getNote());
