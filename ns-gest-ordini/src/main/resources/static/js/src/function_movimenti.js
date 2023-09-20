@@ -83,12 +83,13 @@ function selectElementClienti(id, jsonData) {
 function callbackFunction(event) {
     event.preventDefault();
     const myFormData = new FormData(event.target);
-
-    const formDataObj = Object.fromEntries(myFormData.entries());
+    
+    var formDataObj = {};
+    formDataObj = Object.fromEntries(myFormData.entries());
     console.log(formDataObj);
 	
-	
-	    
+    console.log(JSON.stringify(formDataObj));
+    var formDataObjToJSON = JSON.stringify(formDataObj);
    fetch("http://localhost:8080/api/movimenti/ins",
     {
         method: 'POST',
@@ -96,7 +97,7 @@ function callbackFunction(event) {
         	 'Accept': 'application/json',
              'Content-Type': 'application/json'
                 },
-        body: formDataObj
+        body: formDataObjToJSON
     }).then(response =>{
         console.log(response.status)
     })
