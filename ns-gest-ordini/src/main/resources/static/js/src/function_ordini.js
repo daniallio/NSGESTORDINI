@@ -1,9 +1,7 @@
 cercaOrdini();
 
 function cercaOrdini() {
-    let container = document.getElementById("all");
-    let container2 = document.getElementById("allDw");
-    let container3 = document.getElementById("allEl");
+
 
     fetch("http://localhost:8080/api/ordini/all",
             {
@@ -13,7 +11,7 @@ function cercaOrdini() {
         return response.json()
     }).then(jsonData => {
         console.log(jsonData)      
-        caricaOrdini(jsonData, container, container2, container3)
+        caricaOrdini(jsonData)
     })
 
 }
@@ -21,9 +19,8 @@ function cercaOrdini() {
 
 
 
-// funzione che carica la lista dei documenti, la uso per fare il cerca e per
-// caricare gli utenti condivisi
-function caricaOrdini(jsonData, container, container2, container3) {
+//funziona che carica la tabella con l'elenco dei ordini
+function caricaOrdini(jsonData) {
 
 	var root = document.getElementById('rootTH');
 	
