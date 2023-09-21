@@ -79,16 +79,15 @@ function selectElementClienti(id, jsonData) {
 }
 
 
-
+//funzione per inseire i movimenti
 function callbackFunction(event) {
     event.preventDefault();
     const myFormData = new FormData(event.target);
     
     var formDataObj = {};
-    formDataObj = Object.fromEntries(myFormData.entries());
-    console.log(formDataObj);
-	
-    console.log(JSON.stringify(formDataObj));
+    //costruisco un oggetto con i valori inseriti nel form
+    formDataObj = Object.fromEntries(myFormData.entries());  	
+    //lo converto in JSON
     var formDataObjToJSON = JSON.stringify(formDataObj);
    fetch("http://localhost:8080/api/movimenti/ins",
     {
@@ -99,7 +98,23 @@ function callbackFunction(event) {
                 },
         body: formDataObjToJSON
     }).then(response =>{
-        console.log(response.status)
+    	
+    	console.log(response.status)
+    	
+    	if(response.status==200){    
+    		
+            let esito = document.getElementById("esitoMov")
+            esito.classList.add("bg-success");
+            esito.innerHTML = "Inserimento avvenuto con successo"            
+         }
+    	
+         if(response.status != 200){            
+            let esito = document.getElementById("esitoMov")
+            esito.classList.add("alert-danger");
+            esito.innerHTML = "Errore nell'inseirimento del movimento"
+          }
+    	
+        
     })
     
     
