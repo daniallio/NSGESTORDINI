@@ -1,3 +1,9 @@
+var options = {
+  valueNames: [ 'cliente', 'ordine', 'mese', 'ore']
+};
+
+var userList = new List('movimenti', options);
+
 
 cercaClienti();
 cercaOrdini();
@@ -136,19 +142,24 @@ function cercaMovimenti() {
 function caricaMovimenti(jsonData) {
 
 	var root = document.getElementById('rootTH');
-	//root.innerHTML = "";
+
+	
+	
 	
 	jsonData.forEach(elemento => root.insertAdjacentHTML('beforebegin', `<tr id = ${elemento.key}>
-	<td>${elemento.cliente}</td>
-	<td>${elemento.ordine}</td>
-	<td>${elemento.mese}</td>
-	<td>${elemento.ore}</td>
-	<td>${elemento.note}</td>	
-	<td><button onclick = ModMovimento(${elemento.key}) class="btn btn-danger">Modifica</button></td>	
-	<td><button onclick = cancMovimento(${elemento.key}) class="btn btn-danger">Elimina</button></td>
+	<td class ="cliente">${elemento.cliente}</td>
+	<td class ="ordine">${elemento.ordine}</td>
+	<td class ="mese">${elemento.mese}</td>
+	<td class ="ore">${elemento.ore}</td>
+	<td>${elemento.note}</td>
+	<td><button onclick = modMov(${elemento.key}) class="btn btn-danger">Modifica</button></td>
+	<td><button onclick = cancMov(${elemento.key}) class="btn btn-danger">Elimina</button></td>
 	
 	</tr>`));
-}
+	
+	
+	}
+	
 
 
 
