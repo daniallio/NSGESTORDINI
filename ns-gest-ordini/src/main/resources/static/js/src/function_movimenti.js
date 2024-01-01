@@ -256,8 +256,7 @@ function caricaMovimenti(jsonData) {
     container.appendChild(table) // Append the table to the container element
 	
 	
-	
-	
+		
 	
 	
 	
