@@ -1,16 +1,24 @@
-var options = {
-  valueNames: [ 'cliente', 'ordine', 'mese', 'ore']
+/*var options = {
+  valueNames: [ 'cliente', 'ordine', 'mese', 'ore','note']
 };
 
 var userList = new List('movimenti', options);
-
+*/
 
 cercaClienti();
 cercaOrdini();
 const fIns= document.getElementById("insMov") //from di inserimento movimento
 
 
-cercaMovimenti()
+
+
+   $(document).ready(function() {
+
+	   cercaMovimenti()
+    });
+
+
+
 fIns.addEventListener('submit', callbackFunction);
 
 
@@ -21,10 +29,10 @@ function cercaClienti() {
             {
                 method: "GET"               
             }).then(response => {
-        console.log(response.status)
+        
         return response.json()
     }).then(jsonData => {
-        console.log(jsonData)
+        
         //funziona che valorizza la select del form con l'elenco dei codici clienti
         selectElementClienti('cliente',jsonData)
     })
@@ -44,7 +52,7 @@ function cercaOrdini() {
         console.log(response.status)
         return response.json()
     }).then(jsonData => {
-        console.log(jsonData)      
+            
         selectElementOrdini('ordine',jsonData)
     })
 
@@ -125,6 +133,38 @@ function callbackFunction(event) {
 
 function cercaMovimenti() {
 
+/*
+
+	  $('#example').DataTable({
+	        "fnCreatedRow": function(nRow, aData, iDataIndex) {
+	          $(nRow).attr('id', aData[0]);
+	        },
+	        'serverSide': 'true',
+	        'processing': 'true',
+	        'paging': 'true',
+	        'order': [],
+	        'ajax': {
+	          'url': 'http://localhost:8080/api/movimenti/all',
+	          'type': 'get',
+	        },
+	        "aoColumnDefs": [{
+	            "bSortable": false,
+	            "aTargets": [5]
+	          },
+
+	        ]
+	      });
+	
+	
+	
+	*/
+	
+	
+	
+	
+	
+	
+	
 
     fetch("http://localhost:8080/api/movimenti/all",
             {
@@ -141,7 +181,89 @@ function cercaMovimenti() {
 //funziona che carica la tabella con l'elenco dei movimenti
 function caricaMovimenti(jsonData) {
 
-	var root = document.getElementById('rootTH');
+	
+    // Get the container element where the table will be inserted
+    let container = document.getElementById("containers");
+    
+    // Get the table element
+    let table = document.getElementById("movList");
+    
+	 //Get the Tbody  element
+	  let tbody = document.getElementById("listTbody");
+	 
+	 
+   /* // Get the keys (column names) of the first object in the JSON data
+    let cols = Object.keys(jsonData[0]);
+    
+    // Create the header element
+    let thead = document.createElement("thead");
+    let tr = document.createElement("tr");*/
+    
+    // Loop through the column names and create header cells
+    /*cols.forEach((item) => {
+       let th = document.createElement("th");
+       th.innerText = item; // Set the column name as the text of the header cell
+       tr.appendChild(th); // Append the header cell to the header row
+    });
+    thead.appendChild(tr); // Append the header row to the header
+    table.append(tr) // Append the header to the table*/
+    
+    // Loop through the JSON data and create table rows
+    jsonData.forEach((item) => {
+       let tr = document.createElement("tr");
+       
+       // Get the values of the current object in the JSON data
+       //let vals = Object.values(item);
+	   let td_cliente = document.createElement("td");
+	   td_cliente.innerText = item.cliente; // Set the value as the text of the table cell
+	   td_cliente.classList.add("cliente")
+       let td_ordine = document.createElement("td");
+	   td_ordine.innerText = item.ordine; // Set the value as the text of the table cell
+	   td_ordine.classList.add("ordine")
+		let td_mese = document.createElement("td");
+	   td_mese.innerText = item.mese; // Set the value as the text of the table cell
+	    td_mese.classList.add("mese")
+	   let td_ore = document.createElement("td");
+	   td_ore.innerText = item.ore; // Set the value as the text of the table cell
+	    td_ore.classList.add("ore")
+	   let td_note = document.createElement("td");
+	   td_note.innerText = item.note; // Set the value as the text of the table cell
+	   td_note.classList.add("note")
+	   let td_modify = document.createElement("td");
+	   let bt_modify = document.createElement("button");
+	   bt_modify.innerText = "Modifica";
+	   //bt_modify.classList.add("btn btn-danger")
+	   td_modify.appendChild(bt_modify);
+	   
+	   
+       //console.log(vals)
+       // Loop through the values and create table cells
+       /*vals.forEach((elem) => {
+		   console.log(elem)
+          let td = document.createElement("td");
+          td.innerText = elem; // Set the value as the text of the table cell
+          tr.appendChild(td); // Append the table cell to the table row
+       });*/
+		tr.appendChild(td_cliente); // Append the table cell to the table row
+		tr.appendChild(td_ordine); // Append the table cell to the table row
+		tr.appendChild(td_mese); // Append the table cell to the table row
+		tr.appendChild(td_ore); // Append the table cell to the table row
+		tr.appendChild(td_note); // Append the table cell to the table row
+		tr.appendChild(td_modify);
+		tbody.appendChild(tr);
+       table.appendChild(tbody); // Append the table row to the table
+    });
+    container.appendChild(table) // Append the table to the container element
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	var root = document.getElementById('rootLmovTH');
 
 	
 	
@@ -151,12 +273,25 @@ function caricaMovimenti(jsonData) {
 	<td class ="ordine">${elemento.ordine}</td>
 	<td class ="mese">${elemento.mese}</td>
 	<td class ="ore">${elemento.ore}</td>
-	<td>${elemento.note}</td>
+	<td class = "note"> ${elemento.note}</td>
 	<td><button onclick = modMov(${elemento.key}) class="btn btn-danger">Modifica</button></td>
-	<td><button onclick = cancMov(${elemento.key}) class="btn btn-danger">Elimina</button></td>
+	
 	
 	</tr>`));
 	
+	
+	
+	
+	
+	var options = {
+			  valueNames: [ 'cliente', 'ordine','mese','ore','note']
+			};
+
+	var contactList = new List('containers', options);
+	
+	
+	
+			
 	
 	}
 	
