@@ -261,12 +261,9 @@ function caricaMovimenti(jsonData) {
 	
 	
 	
-	
+	/*
 	var root = document.getElementById('rootLmovTH');
-
-	
-	
-	
+		
 	jsonData.forEach(elemento => root.insertAdjacentHTML('beforebegin', `<tr id = ${elemento.key}>
 	<td class ="cliente">${elemento.cliente}</td>
 	<td class ="ordine">${elemento.ordine}</td>
@@ -277,19 +274,19 @@ function caricaMovimenti(jsonData) {
 	
 	
 	</tr>`));
+	*/
 	
 	
-	
-	
+	/*
 	
 	var options = {
 			  valueNames: [ 'cliente', 'ordine','mese','ore','note']
 			};
 
 	var contactList = new List('containers', options);
+	*/
 	
-	
-	
+	let tableMovimenti = new DataTable('#movList');
 			
 	
 	}
