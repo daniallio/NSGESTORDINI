@@ -31,7 +31,7 @@
 			</li>
 		</ul>
 
-		<div class="row">
+		<!--  <div class="row">
 			<div class="col-sm-10">
 				<a class="list-group-item list-group-item-action active"
 					id="barraCond" style="height: 62px">
@@ -86,10 +86,98 @@
 
 
 				</div>
+			</div> -->
+
+
+		
+
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+			data-bs-target="#exampleModal">Nuovo movimento</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Nuovo movimento</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-sm-10">
+								
+								<div class="list-group" id="all">
+
+									<div id="esitoMov" style="text-align: center"></div>
+
+									<form id="insMov">
+										<div class="form-group">
+											<label for="exampleFormControlInput1">Ore</label> <input
+												type="number" class="form-control" id="ore" name="ore">
+										</div>
+										<div class="form-group">
+											<label for="exampleFormControlSelect1">Cliente</label> <select
+												class="form-control" id="cliente" name="cliente">
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="exampleFormControlSelect1">Mese</label> <select
+												class="form-control" id="mese" name="mese">
+												<option>1</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+												<option>6</option>
+												<option>7</option>
+												<option>8</option>
+												<option>9</option>
+												<option>10</option>
+												<option>11</option>
+												<option>12</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="exampleFormControlSelect1">Ordine</label> <select
+												class="form-control" id="ordine" name="ordine">
+												<option>1</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="exampleFormControlTextarea1">Note</label>
+											<textarea class="form-control" id="note" name="note" rows="3"></textarea>
+										</div>
+										<div class="form-group">
+											<input type="submit" class="btn btn-primary mb-2" id="invia"
+												value="Invia" />
+										</div>
+									</form>
+
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Chiudi</button>
+						<button type="button" class="btn btn-primary">Invia
+							changes</button>
+					</div>
+				</div>
 			</div>
-
-
 		</div>
+		<!-- END Modal -->
+
+</div>  <!-- END Container -->
+
+
+
 
 		<!--  <div id="containers">
 			<table id="movList" class="display" width="100%">
@@ -109,16 +197,16 @@
 
 			</table> -->
 
-
-		<div class="container">
+		<!-- Tabella con elenco movimenti -->
+		<div class="container" id="containerMov">
 			<table id="movList" class="display" width="100%">
 				<thead>
 					<tr>
-						<th >Cliente</th>
-						<th >Ordine</th>
-						<th  >Mese</th>
-						<th >Ore</th>
-						<th >Note</th>
+						<th>Cliente</th>
+						<th>Ordine</th>
+						<th>Mese</th>
+						<th>Ore</th>
+						<th>Note</th>
 						<th>Modifica</th>
 					</tr>
 				</thead>
@@ -127,35 +215,8 @@
 				</tbody>
 
 			</table>
-		</div>
+		</div><!-- END Tabella con elenco movimenti -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-		<div class="row">
-			<div class="col-sm-10">
-				<div class="list-group" id="all">
-
-					<p class="d-inline-flex gap-1">
-						<a class="btn btn-primary" data-bs-toggle="collapse"
-							href="#collapseExample" role="button" aria-expanded="false"
-							aria-controls="collapseExample"> Elenco Movimenti </a>
-					</p>
-					<div class="collapse" id="collapseExample"></div>
-				</div>
-			</div>
-
-		</div>
 
 
 

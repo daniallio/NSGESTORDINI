@@ -133,36 +133,7 @@ function callbackFunction(event) {
 
 function cercaMovimenti() {
 
-/*
 
-	  $('#example').DataTable({
-	        "fnCreatedRow": function(nRow, aData, iDataIndex) {
-	          $(nRow).attr('id', aData[0]);
-	        },
-	        'serverSide': 'true',
-	        'processing': 'true',
-	        'paging': 'true',
-	        'order': [],
-	        'ajax': {
-	          'url': 'http://localhost:8080/api/movimenti/all',
-	          'type': 'get',
-	        },
-	        "aoColumnDefs": [{
-	            "bSortable": false,
-	            "aTargets": [5]
-	          },
-
-	        ]
-	      });
-	
-	
-	
-	*/
-	
-	
-	
-	
-	
 	
 	
 
@@ -183,7 +154,7 @@ function caricaMovimenti(jsonData) {
 
 	
     // Get the container element where the table will be inserted
-    let container = document.getElementById("containers");
+    let container = document.getElementById("containerMov");
     
     // Get the table element
     let table = document.getElementById("movList");
