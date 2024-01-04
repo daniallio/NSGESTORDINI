@@ -1,15 +1,9 @@
-console.log('QUA')
+
 cercaClienti();
 
 function cercaClienti() {
 
-
-
-    let container = document.getElementById("all");
-    let container2 = document.getElementById("allDw");
-    let container3 = document.getElementById("allEl");
-
-    fetch("http://localhost:8080/api/clienti/all",
+  fetch("http://localhost:8080/api/clienti/all",
             {
                 method: "GET"               
             }).then(response => {
@@ -17,7 +11,7 @@ function cercaClienti() {
         return response.json()
     }).then(jsonData => {
         console.log(jsonData)      
-        caricaClienti(jsonData, container, container2, container3)
+        caricaClienti(jsonData)
     })
 
 }
@@ -25,46 +19,76 @@ function cercaClienti() {
 
 
 
-//funzione che carica la lista dei documenti, la uso per fare il cerca e per caricare gli utenti condivisi
-function caricaClienti(jsonData, container, container2, container3) {
-  /*for (var i = 0; i < jsonData.length; i++) {
-      //creo i link per il download e gli elementi della lista
-      let el = document.createElement(`p`)
-      let btnEl = document.createElement("a")
-      let btnDown = document.createElement("a")
-      let liDown = document.createElement("li")
-      let liEl = document.createElement("li")
-      btnEl.classList.add("badge-light")
-      liDown.classList.add("fas")
-      liDown.classList.add("fa-download")
-      liEl.classList.add("fas")
-      liEl.classList.add("fa-trash")
-      liDown.setAttribute("style", "color:grey")
-      liEl.setAttribute("style", "color:grey")
-      btnDown.classList.add("badge-light")
-      btnDown.setAttribute("href", "http://localhost:8080/esame_cloud/rest/documenti/download/" + jsonData[i].key);
-      btnEl.setAttribute("href", "#");
-      btnDown.setAttribute("style", "height:49px")
-      btnEl.setAttribute("style", "height:49px")
-      btnEl.setAttribute(`onclick`, `elimina(${jsonData[i].idDocumento})`)
-      btnDown.style.fontSize = "200px";
+//funzione che carica la lista dei clienti
+function caricaClienti(jsonData) {
 
-      el.classList.add("list-group-item");
-      el.setAttribute("id", "pDoc");
-      el.innerHTML = "<b> Codice Client </b> - " + jsonData[i].codiceCliente + " - <b> Descrizione </b>" + jsonData[i].descrizione
-
-      btnDown.appendChild(liDown)
-      btnEl.appendChild(liEl)
-      container.appendChild(el)
-      container2.appendChild(btnDown)
-      container3.appendChild(btnEl)
-  }*/
 	var root = document.getElementById('rootTH');
 	
+	// Get the container element where the table will be inserted
+    let container = document.getElementById("containerCli");
+    
+    // Get the table element
+    let table = document.getElementById("cliList");
+    
+	 //Get the Tbody  element
+	  let tbody = document.getElementById("listTbody");
+	
+	
+	//creo una tabella con gli elementi ritornati
+	  jsonData.forEach((item) => {
+       let tr = document.createElement("tr");
+       
+       // Get the values of the current object in the JSON data
+       //let vals = Object.values(item);
+	   let td_cliente = document.createElement("td");
+	   td_cliente.innerText = item.codiceCliente; // Set the value as the text of the table cell
+	   td_cliente.classList.add("cliente")
+       let td_desc = document.createElement("td");
+	   td_desc.innerText = item.descrizione; // Set the value as the text of the table cell
+	   td_desc.classList.add("ordine")
+		
+	   let td_del = document.createElement("td");
+	   let bt_del = document.createElement("button");
+	   bt_del.innerText = "Elimina";
+	   bt_del.classList.add("btn-danger")
+	   td_del.appendChild(bt_del);
+	   bt_del.setAttribute("id", item.key);
+	   bt_del.addEventListener('click', function(){
+			cancCliente(item.key);
+		});
+       //console.log(vals)
+       // Loop through the values and create table cells
+       /*vals.forEach((elem) => {
+		   console.log(elem)
+          let td = document.createElement("td");
+          td.innerText = elem; // Set the value as the text of the table cell
+          tr.appendChild(td); // Append the table cell to the table row
+       });*/
+		tr.appendChild(td_cliente); // Append the table cell to the table row
+		tr.appendChild(td_desc); // Append the table cell to the table row
+
+		tr.appendChild(td_del);
+		tbody.appendChild(tr);
+       table.appendChild(tbody); // Append the table row to the table
+    });
+    container.appendChild(table) // Append the table to the container element
+	
+	
+	
+	
+	
+	//creo la datatable
+	let tableMovimenti = new DataTable('#cliList');
+				
+	
+
+	
+	
+	/*
 	
 	jsonData.forEach(elemento => root.insertAdjacentHTML('beforebegin', `<tr id = 'rowClienti'><td>${elemento.codiceCliente}</td>
 	<td>${elemento.descrizione}</td>
-	<td><button onclick = cancCliente(${elemento.key}) class="btn btn-danger">Elimina</button></td></tr>`));
+	<td><button onclick = cancCliente(${elemento.key}) class="btn btn-danger">Elimina</button></td></tr>`));*/
 }
 
 
@@ -78,7 +102,7 @@ function cancCliente(key){
             {method: "DELETE"
             }).then(response => {
         if (response.status == 200) {
-            console.log(response.status)
+            
 			location.reload();
         }else{
 			alert('Probelma nella cancellazione')
