@@ -41,9 +41,67 @@
 				</a>
 				
 				
-				<div class="list-group" id="containerCli">
+				<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+			data-bs-target="#exampleModal">Nuovo cliente</button>
 
-					
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Nuovo cliente</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-sm-10">
+								
+								<div class="list-group" id="all">
+
+									<div id="esitoCli" style="text-align: center"></div>
+
+									<form id="insCli">
+										<div class="form-group">
+											<label for="exampleFormControlInput1">Codice</label> <input
+												type="text" class="form-control text-uppercase" id="codiceCliente" name="codiceCliente">
+										</div>
+										<div class="form-group">
+											<label for="exampleFormControlInput1">Descrizione</label> <input
+												type="text" class="form-control" id="descrizione" name="descrizione">
+										</div>										
+										<div class="form-group">
+											<input type="submit" class="btn btn-primary mb-2" id="invia"
+												value="Inserisci" />
+										</div>
+									</form>
+
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Chiudi</button>
+						<button type="button" class="btn btn-primary">Invia
+							changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END Modal -->
+
+</div>  <!-- END Container -->
+				
+				
+				
+				
+				<div class="list-group" id="containerCli">
 
 					<table class="table table-striped" id ="cliList">
 						<thead>
