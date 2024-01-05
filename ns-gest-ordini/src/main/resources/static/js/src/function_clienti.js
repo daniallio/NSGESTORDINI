@@ -18,7 +18,6 @@ function cercaClienti() {
 
 
 
-
 //funzione che carica la lista dei clienti
 function caricaClienti(jsonData) {
 
