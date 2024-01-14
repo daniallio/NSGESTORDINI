@@ -88,7 +88,6 @@ function selectElementClienti(id, jsonData) {
       });       
 }
 
-
 //funzione per inseire i movimenti
 function callbackFunction(event) {
     event.preventDefault();
