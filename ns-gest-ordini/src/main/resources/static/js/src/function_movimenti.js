@@ -8,7 +8,7 @@ var userList = new List('movimenti', options);
 cercaClienti();
 cercaOrdini();
 const fIns= document.getElementById("insMov") //form di inserimento movimento
-
+const chiudiModal = document.getElementById('chiudiModal') //pulsante Chiusura della modale d'inserimento movimento
 
 
    $(document).ready(function() {

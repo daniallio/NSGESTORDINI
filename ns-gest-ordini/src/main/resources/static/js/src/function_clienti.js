@@ -1,5 +1,7 @@
 //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
 
+
+const chiudiModal = document.getElementById('chiudiModal') //pulsante Chiusura della modale d'inserimento cliente
 const fIns= document.getElementById("insCli") //form di inserimento movimento
 fIns.addEventListener('submit', insCliente);
 cercaClienti();
@@ -33,7 +35,7 @@ function caricaClienti(jsonData) {
     
 	 //Get the Tbody  element
 	  let tbody = document.getElementById("listTbody");
-	
+	  listTbody.innerHTML = ""; //pulisco i campi ogni volta che devo inserili
 	
 	//creo una tabella con gli elementi ritornati
 	  jsonData.forEach((item) => {
@@ -157,5 +159,12 @@ function insCliente(){
 }
 
 
+//quando chiudo la modale d'inserimento ricarico l'elenco e pulisco i campi del form
+chiudiModal.onclick = function () {
+	
+	fIns.reset(); //pulisco tutti i campi del form
+	cercaClienti();	//ricarico l'elenco
+	
+};
 
 
