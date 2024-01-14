@@ -7,8 +7,7 @@ var userList = new List('movimenti', options);
 
 cercaClienti();
 cercaOrdini();
-const fIns= document.getElementById("insMov") //from di inserimento movimento
-
+const fIns= document.getElementById("insMov") //form di inserimento movimento
 
 
 
@@ -131,10 +130,8 @@ function callbackFunction(event) {
 	
 }
 
+//carica tutti i movimenti
 function cercaMovimenti() {
-
-
-	
 	
 
     fetch("http://localhost:8080/api/movimenti/all",

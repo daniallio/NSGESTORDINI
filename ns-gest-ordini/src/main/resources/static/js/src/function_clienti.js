@@ -1,4 +1,7 @@
 //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
+
+const fIns= document.getElementById("insCli") //form di inserimento movimento
+fIns.addEventListener('submit', insCliente);
 cercaClienti();
 
 function cercaClienti() {
@@ -92,7 +95,6 @@ function caricaClienti(jsonData) {
 
 
 //cancella un cliente
-
 function cancCliente(key){
 	
 	console.log(key);
@@ -110,7 +112,50 @@ function cancCliente(key){
 	
 }
 
+//Inserisco un nuovo cliente
+function insCliente(){
+	
+	
+    event.preventDefault();
+    const myFormData = new FormData(event.target);
+    
+    var formDataObj = {};
+    //costruisco un oggetto con i valori inseriti nel form
+    formDataObj = Object.fromEntries(myFormData.entries());  	
+    //lo converto in JSON
+    var formDataObjToJSON = JSON.stringify(formDataObj);
+   
+    
+    fetch("http://localhost:8080/api/clienti/ins",
+    {
+        method: 'POST',
+        headers: {
+        	 'Accept': 'application/json',
+             'Content-Type': 'application/json'
+                },
+        body: formDataObjToJSON
+    }).then(response =>{
+    	
+    	console.log(response.status)
+    	
+    	if(response.status==200){    
+    		
+            let esito = document.getElementById("esitoCli")
+            esito.classList.add("bg-success");
+            esito.innerHTML = "Inserimento avvenuto con successo"            
+         }
+    	
+         if(response.status != 200){            
+            let esito = document.getElementById("esitoCli")
+            esito.classList.add("alert-danger");
+            esito.innerHTML = "Errore nell'inseirimento del movimento"
+          }
+    	
+        
+    })   
 
+	
+}
 
 
 
