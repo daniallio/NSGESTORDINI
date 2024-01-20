@@ -12,11 +12,11 @@ function cercaClienti() {
             {
                 method: "GET"               
             }).then(response => {
-        console.log(response.status)
+        
         return response.json()
     }).then(jsonData => {
-        console.log(jsonData)      
-        caricaClienti(jsonData)
+             
+        caricaClienti(jsonData) //creo la tabella dei clienti
     })
 
 }

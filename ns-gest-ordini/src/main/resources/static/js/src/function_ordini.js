@@ -1,3 +1,5 @@
+const apriModalOrdine = document.getElementById('modNuovoOrdine') //pulsante chje ape la modale d'inserimento ordine
+
 cercaOrdini();
 
 function cercaOrdini() {
@@ -16,7 +18,22 @@ function cercaOrdini() {
 
 }
 
+//recupera i dati dei clienti
+function cercaClienti() {
 
+    fetch("http://localhost:8080/api/clienti/all",
+            {
+                method: "GET"               
+            }).then(response => {
+        
+        return response.json()
+    }).then(jsonData => {
+        
+        //funziona che valorizza la select del form con l'elenco dei codici clienti
+        selectElementClienti('cliente',jsonData)
+    })
+
+}
 
 
 //funziona che carica la tabella con l'elenco dei ordini
@@ -61,6 +78,25 @@ function cancCliente(key){
 
 
 
+//funzione che precarica i valori delle select clienti del form
+function selectElementClienti(id, jsonData) {    
+    let element = document.getElementById(id);
+    
+    jsonData.forEach(cliente => {
+        let opt = document.createElement('option');
+        opt.value = cliente.codiceCliente;
+        opt.textContent += cliente.descrizione // or opt.innerHTML += user.name
+        element.appendChild(opt);
+      });       
+}
+
+
+//quando apro la modale carico la lista dei clienti nella select di selezione
+apriModalOrdine.onclick = function () {
+	
+	 cercaClienti();
+	
+};
 
 
 
