@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.daniallio.webapp.entities.Clienti;
 import com.daniallio.webapp.entities.Ordini;
 import com.daniallio.webapp.repository.OrdiniRepository;
 
@@ -45,6 +46,11 @@ public class OrdiniServiceImp implements OrdiniService{
 	public void cancOrdine(int id) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Optional<List<Ordini>> selOrdiniByCliente(Clienti cliente) {
+		return repo.findByCliente(cliente);
 	}
 
 }

@@ -29,7 +29,8 @@ public class OrdiniController {
 	@Autowired
 	OrdiniService serviceOrdini;
 	
-	
+	@Autowired
+	ClientiService serviceClienti;
 	
 	private static final Logger logger = LoggerFactory.getLogger(OrdiniController.class);
 	
@@ -48,6 +49,50 @@ public class OrdiniController {
 		
 	}
 	
+	//ritorna l'elenco degli ordini per un cliente
+	@GetMapping(value = "/all/cliente/{cliente}", produces = "application/json")
+	public ResponseEntity<List<OrdiniDTO>>getAllOrdiniByCliente(@PathVariable("cliente")String cliente){
+		
+		logger.info("********Medoto getAllOrdiniByCliente " + cliente);
+		
+		
+		//dato il codice cliente recupero l'entità cliente collegata
+		
+		Optional<Clienti> clienteOpt = serviceClienti.selClienteByCodice(cliente);
+		
+		if(clienteOpt.isPresent() ) {
+			
+			Clienti clienteEntity = clienteOpt.get();
+			
+			
+			//recupero l'eòenco degli ordini per cliente			
+			Optional<List<Ordini>> ordini =  serviceOrdini.selOrdiniByCliente(clienteEntity);				
+			
+			List<OrdiniDTO> ordiniDTO = new ArrayList<OrdiniDTO>();
+			
+			//se è presente un ordine
+			if(ordini.isPresent()) {
+				
+				//converto in DTO
+				
+				ordini.get().forEach(s -> ordiniDTO.add(s.ordiniToDTO()));
+				
+			}
+		
+			return new ResponseEntity<List<OrdiniDTO>>(ordiniDTO, HttpStatus.OK);
+			
+		}
+		return null;
+		
+	
+			
+		
+	
+		
+	}
+	
+	
+	
 	
 	
 	//ritorna ordine per codice
@@ -65,13 +110,13 @@ public class OrdiniController {
 		//se esite lo converto in DTO altrimenti eccezione
 		if(ordine.isPresent()) {
 			
-			ordineDTO  = ordine.get().ordiniToDTO();
+			ordineDTO  = ordine.get().ordiniToDTO();		
+			
 		}
 		
 
 		
-		return new ResponseEntity<OrdiniDTO>(ordineDTO, HttpStatus.OK);
-		
+		return new ResponseEntity<OrdiniDTO>(ordineDTO, HttpStatus.OK);		
 		
 
 	}
