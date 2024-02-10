@@ -5,8 +5,8 @@
 var userList = new List('movimenti', options);
 */
 
-cercaClienti();
-cercaOrdini();
+
+cercaClienti(); //carica la select list con l'elenco dei clienti
 const fIns= document.getElementById("insMov") //form di inserimento movimento
 const chiudiModal = document.getElementById('chiudiModal') //pulsante Chiusura della modale d'inserimento movimento
 
@@ -17,7 +17,7 @@ const chiudiModal = document.getElementById('chiudiModal') //pulsante Chiusura d
     });
 
 
-
+//richiamo la funzione di inserimento di movimento
 fIns.addEventListener('submit', callbackFunction);
 
 
@@ -40,18 +40,29 @@ function cercaClienti() {
 
 
 
+//quando selezione un cliente devo prevalorizzare la lista degli ordini con solo quelli del cliente
+document.getElementById("cliente").addEventListener('change', (event) => {
+	 //recupero il codice cliente selezionato 
+	var cliente = event.target.value;
+	
+	//richiamo la funzione che recupera gli ordini del cliente
+	cercaOrdiniCliente(cliente)
+	console.log(event.target.value)
+	});
 
-function cercaOrdini() {
+
+//funzione che richiama tutti gli ordini di un cliente
+function cercaOrdiniCliente(cliente) {
    
 
-    fetch("http://localhost:8080/api/ordini/all",
+    fetch("http://localhost:8080/api/ordini/all/cliente/" + cliente,
             {
                 method: "GET"               
             }).then(response => {
-        console.log(response.status)
+        
         return response.json()
     }).then(jsonData => {
-            
+         //richiamo la funzione che popola la select con gli ordini   
         selectElementOrdini('ordine',jsonData)
     })
 
@@ -60,10 +71,10 @@ function cercaOrdini() {
 
 
 
-//funzione che precarica i valori delle select clienti del form
+//funzione che precarica i valori delle select ordini  del form in base al cliente passato
 function selectElementOrdini(id, jsonData) {    
     let element = document.getElementById(id);
-    
+    removeOptions(element);
     jsonData.forEach(ordine => {
         let opt = document.createElement('option');
         opt.value = ordine.key;
@@ -79,7 +90,8 @@ function selectElementOrdini(id, jsonData) {
 //funzione che precarica i valori delle select clienti del form
 function selectElementClienti(id, jsonData) {    
     let element = document.getElementById(id);
-    
+	//pulisco la lista 
+	
     jsonData.forEach(cliente => {
         let opt = document.createElement('option');
         opt.value = cliente.codiceCliente;
@@ -259,6 +271,13 @@ function caricaMovimenti(jsonData) {
 	}
 	
 
+//pulisce gli elementi di una select list
+function removeOptions(selectElement) {
+	   var i, L = selectElement.options.length - 1;
+	   for(i = L; i >= 0; i--) {
+	      selectElement.remove(i);
+	   }
+	}
 
 
 
