@@ -12,10 +12,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.daniallio.webapp.entities.Clienti;
 import com.daniallio.webapp.entities.ClientiDTO;
+import com.daniallio.webapp.entities.Movimenti;
+import com.daniallio.webapp.entities.MovimentiDTO;
 import com.daniallio.webapp.entities.Ordini;
 import com.daniallio.webapp.entities.OrdiniDTO;
 import com.daniallio.webapp.services.ClientiService;
@@ -114,10 +118,55 @@ public class OrdiniController {
 			
 		}
 		
-
+		
 		
 		return new ResponseEntity<OrdiniDTO>(ordineDTO, HttpStatus.OK);		
 		
 
 	}
+	
+	
+	//inserimento nuovo ordine
+	@PostMapping (value = "/ins", produces = "application/json")
+	
+	public ResponseEntity<OrdiniDTO>  insOrdine(@RequestBody OrdiniDTO ordine) throws Exception{
+		
+		
+		logger.info("********Medoto insOrdine");
+		Optional<Clienti> cliente;
+		
+
+		//verifico che esistano l'ordine ed il cliente
+		
+		
+		logger.info(ordine.getCliente());
+	
+		cliente = serviceClienti.selClienteByCodice(ordine.getCliente());
+		
+		if(!cliente.isPresent()) {
+			
+			throw new Exception ("Cliente non corretto");
+		}
+		
+		//preparo l'inserimento dell'ordine
+		logger.info("Preparo ordine " + ordine.getKey());
+		Ordini ordineIns = new Ordini();
+		
+		ordineIns.setCliente(cliente.get());
+		ordineIns.setKey(ordine.getKey());
+		ordineIns.setDescrizione(ordine.getDescrizione());
+		ordineIns.setDataOrd(ordine.getDataOrd());
+		ordineIns.setOre(ordine.getOre());
+		ordineIns.setValore(ordine.getValore());
+		
+		serviceOrdini.insOrdini(ordineIns);
+		
+		return new ResponseEntity<OrdiniDTO>(ordine, HttpStatus.OK);		
+		
+		
+	
+	}
+	
+	
+	
 }

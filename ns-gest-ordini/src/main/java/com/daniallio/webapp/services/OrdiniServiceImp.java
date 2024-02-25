@@ -32,7 +32,7 @@ public class OrdiniServiceImp implements OrdiniService{
 
 	@Override
 	public void insOrdini(Ordini ordini) {
-		// TODO Auto-generated method stub
+		repo.save(ordini);
 		
 	}
 
