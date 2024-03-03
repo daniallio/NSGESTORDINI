@@ -1,4 +1,8 @@
 const apriModalOrdine = document.getElementById('modNuovoOrdine') //pulsante chje ape la modale d'inserimento ordine
+const fIns= document.getElementById("insOrd") //form di inserimento movimento
+
+//richiamo la funzione di inserimento di un nuovo ordine
+fIns.addEventListener('submit', callbackFunction);
 
 cercaOrdini();
 
@@ -189,4 +193,46 @@ apriModalOrdine.onclick = function () {
 };
 
 
+//funzione per inseire ordini
+function callbackFunction(event) {
+  event.preventDefault();
+  const myFormData = new FormData(event.target);
+  
+  var formDataObj = {};
+  //costruisco un oggetto con i valori inseriti nel form
+  formDataObj = Object.fromEntries(myFormData.entries());  	
+  //lo converto in JSON
+  var formDataObjToJSON = JSON.stringify(formDataObj);
+  console.log(formDataObjToJSON)
+  
+ fetch("http://localhost:8080/api/ordini/ins",
+  {
+      method: 'POST',
+      headers: {
+      	 'Accept': 'application/json',
+           'Content-Type': 'application/json'
+              },
+      body: formDataObjToJSON
+  }).then(response =>{
+  	
+  	console.log(response)
+  	
+  	if(response.status==200){    
+  		
+          let esito = document.getElementById("esitoOrd")
+          esito.classList.add("bg-success");
+          esito.innerHTML = "Inserimento avvenuto con successo"            
+       }
+  	
+       if(response.status != 200){            
+          let esito = document.getElementById("esitoOrd")
+          esito.classList.add("alert-danger");
+          esito.innerHTML = "Errore nell'inseirimento del movimento"
+        }
+  	
+      
+  })   
+
+	
+}
 
